@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyInfo.PresentationLayer", "PharmacyInfo\PharmacyInfo.PresentationLayer.csproj", "{F29207E1-D5B7-4EFD-9DB9-07C83CCE2172}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyInfo.BusinessLogicLayer", "PharmacyInfo.BLL\PharmacyInfo.BusinessLogicLayer.csproj", "{0FAB55C0-9DBE-40C1-80A7-8E69F2DA6040}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyInfo.DataAccessLayer", "PharmacyInfo.DAL\PharmacyInfo.DataAccessLayer.csproj", "{8942AB82-696D-46DD-8E61-8A4A20D18AC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmasyInfo.Core", "PharmasyInfo.Core\PharmasyInfo.Core.csproj", "{04AD64E1-5E2E-4719-9A40-DD03D6A32803}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyInfo.WithoutWebpack", "PharmacyInfo.WithoutWebpack\PharmacyInfo.WithoutWebpack.csproj", "{309448F0-C5FC-42EA-8A8E-86E4A7CEC3AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F29207E1-D5B7-4EFD-9DB9-07C83CCE2172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F29207E1-D5B7-4EFD-9DB9-07C83CCE2172}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F29207E1-D5B7-4EFD-9DB9-07C83CCE2172}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F29207E1-D5B7-4EFD-9DB9-07C83CCE2172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FAB55C0-9DBE-40C1-80A7-8E69F2DA6040}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FAB55C0-9DBE-40C1-80A7-8E69F2DA6040}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FAB55C0-9DBE-40C1-80A7-8E69F2DA6040}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FAB55C0-9DBE-40C1-80A7-8E69F2DA6040}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8942AB82-696D-46DD-8E61-8A4A20D18AC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8942AB82-696D-46DD-8E61-8A4A20D18AC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8942AB82-696D-46DD-8E61-8A4A20D18AC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8942AB82-696D-46DD-8E61-8A4A20D18AC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04AD64E1-5E2E-4719-9A40-DD03D6A32803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04AD64E1-5E2E-4719-9A40-DD03D6A32803}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04AD64E1-5E2E-4719-9A40-DD03D6A32803}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04AD64E1-5E2E-4719-9A40-DD03D6A32803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{309448F0-C5FC-42EA-8A8E-86E4A7CEC3AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{309448F0-C5FC-42EA-8A8E-86E4A7CEC3AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{309448F0-C5FC-42EA-8A8E-86E4A7CEC3AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{309448F0-C5FC-42EA-8A8E-86E4A7CEC3AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74A2FCA6-97FF-461C-B442-9EC8E875FC60}
+	EndGlobalSection
+EndGlobal
