@@ -1,0 +1,82 @@
+﻿<template>
+    <div id="app" class="d-flex">
+        <table class="table ">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" class="" v-for="(value, name) in getPagging[0]">
+                        <p v-if="name !== 'PharmacyId' && name !== 'Id'">
+                            {{name}}
+                        </p>
+                    </th>
+                </tr>
+            </thead>
+
+            <tr v-for="item in getPagging">
+                <td v-for="(value, name) in item">
+                    <p v-if="name !== 'PharmacyId' && name !== 'Id'">
+                        {{value}}
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <div class="d-flex justify-content-center">
+            <button class="btn" v-on:click="PreviousPage()" v-bind:disabled="this.page <= 0">PreviousPage</button>
+            <label>{{this.page+1}}</label>
+            <button class="btn" v-on:click="NextPage()" v-bind:disabled="this.page >= getPageCount ">NextPage</button>
+        </div>
+    </div>
+</template>
+
+<script>
+    vm = new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                pharmacyList: [],
+                page: 0
+            }
+        },
+        created: function () {
+            let jsonList = '@Html.Raw(Json.Encode(Model.Pharmacies))';
+            this.pharmacyList = JSON.parse(jsonList);
+        },
+        methods: {
+            NextPage() {
+                this.page += 1;
+            },
+            PreviousPage() {
+                this.page -= 1;
+            },
+            ResetPage() {
+                this.page = 0;
+            }
+        },
+        computed:
+        {
+            getPageCount() {
+                return Math.floor(this.pharmacyList.length / 10);
+            },
+            getPagging() {
+
+
+                if (this.page > this.pharmacyList.length / 10) {
+                    return this.pharmacyList.slice(0);
+                }
+                else {
+                    return this.pharmacyList.slice(this.page * 10, (this.page + 1) * 10);
+                }
+            },
+            getSorted() {
+                return this.pharmacyList.sort();
+            }
+        }
+    })
+
+</script>
+
+<style>
+    .thead-dark {
+        color: white;
+        background-color: black;
+    }
+</style>

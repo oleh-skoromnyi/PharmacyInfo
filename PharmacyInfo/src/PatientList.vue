@@ -1,0 +1,115 @@
+﻿<template>
+    <div id="app" class="d-flex">
+        <div class="form-check form-check-inline d-flex justify-content-right">
+            <label>Filter: </label>
+            <input type="radio" id="zeroMonthToFilter" class="form-check-input" value='0' v-on:click="ResetPage" v-model="numberOfMonthToFilter">
+            <label for="zeroMonthToFilter" class="form-check-label">No</label>
+            <input type="radio" id="oneMonthToFilter" class="form-check-input" value='1' v-on:click="ResetPage" v-model="numberOfMonthToFilter">
+            <label for="oneMonthToFilter" class="form-check-label">One month</label>
+            <input type="radio" id="threeMonthesToFilter" class="form-check-input" value='3' v-on:click="ResetPage" v-model="numberOfMonthToFilter">
+            <label for="threeMonthesToFilter" class="form-check-label">Three month</label>
+        </div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" class="" v-for="(value, name) in getPagging[0]">
+                        <p v-if="name !== 'PharmacyId' && name !== 'Id'">
+                            {{name}}
+                        </p>
+                    </th>
+                </tr>
+            </thead>
+
+            <tr v-for="item in getPagging">
+                <td v-for="(value, name) in item">
+                    <p v-if="name !== 'PharmacyId' && name !== 'Id'">
+                        {{value}}
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <div class="d-flex justify-content-center">
+            <button class="btn" v-on:click="PreviousPage()" v-bind:disabled="this.page <= 0">PreviousPage</button>
+            <label>{{this.page+1}}</label>
+            <button class="btn" v-on:click="NextPage()" v-bind:disabled="this.page >= getPageCount ">NextPage</button>
+        </div>
+    </div>
+</template>
+
+<script>
+    function filterPatientByMonth(patient, numberOfMonthToFilter) {
+        var patientDate = new Date(new Date(patient.PharmacyAssignDate).setDate(1));
+        var currentDate = new Date(new Date().setDate(1));
+        if (currentDate.getMonth() + 1 > numberOfMonthToFilter) {
+            var filteredDate = new Date(currentDate.getFullYear(), +currentDate.getMonth() - numberOfMonthToFilter);
+        }
+        else {
+            var filteredDate = new Date(currentDate.getFullYear() - 1, +currentDate.getMonth() + 12 - numberOfMonthToFilter);
+        }
+        return patientDate.getTime() > filteredDate.getTime();
+    };
+
+    module.exports = {
+        el: '#patientListApp',
+        data: function () {
+            return {
+                patientList: [],
+                numberOfMonthToFilter: '0',
+                page: 0
+            }
+        },
+        created: function () {
+            let jsonList = '@Html.Raw(Json.Encode(Model.Patients))';
+            this.patientList = JSON.parse(jsonList);
+            this.patientList.forEach(function (patient) {
+                var date = new Date(+patient.PharmacyAssignDate.substring(6, patient.PharmacyAssignDate.length - 2));
+                patient = patient.PharmacyAssignDate = date.getFullYear() + '-' + (date.getMonth() + 1) + "-" + date.getDate();
+            });
+        },
+        methods: {
+            NextPage() {
+                this.page += 1;
+            },
+            PreviousPage() {
+                this.page -= 1;
+            },
+            ResetPage() {
+                this.page = 0;
+            }
+        },
+        computed:
+        {
+            getFiltered() {
+                if (this.numberOfMonthToFilter === '0') {
+                    return this.patientList;
+                }
+                else {
+                    return this.patientList.filter(patient => filterPatientByMonth(patient, this.numberOfMonthToFilter));
+                }
+            },
+            getPageCount() {
+                return Math.floor(this.getFiltered.length / 10);
+            },
+            getPagging() {
+
+
+                if (this.page > this.getFiltered.length / 10) {
+                    return this.getFiltered.slice(0);
+                }
+                else {
+                    return this.getFiltered.slice(this.page * 10, (this.page + 1) * 10);
+                }
+            },
+            getSorted() {
+                return this.getFiltered.sort();
+            }
+        }
+    }
+</script>
+
+<style>
+    .thead-dark {
+        color: white;
+        background-color: black;
+    }
+</style>
