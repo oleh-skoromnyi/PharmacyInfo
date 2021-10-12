@@ -6,7 +6,6 @@ using System.Web;
 using System.Web.Mvc;
 using PharmacyInfo.DataAccessLayer;
 using PharmacyInfo.Core.Entities;
-using PharmacyInfo.Models;
 
 namespace PharmacyInfo.Controllers
 {
@@ -17,15 +16,18 @@ namespace PharmacyInfo.Controllers
         IRepository<Patient> patientRepository = new PatientRepository(connectionString);
         IRepository<Pharmacy> pharmasyRepository = new PharmacyRepository(connectionString);
 
-
-        public ActionResult Patients()
+        [HttpGet]
+        public JsonResult Patients()
         {
-            return View(new PatientViewModel { Patients = patientRepository.FindAll() });
+            var patients = patientRepository.FindAll();
+            return Json(patients,JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Pharmacies()
+        [HttpGet]
+        public JsonResult Pharmacies()
         {
-            return View(new PharmacyViewModel { Pharmacies = pharmasyRepository.FindAll() });
+            var pharmacies = pharmasyRepository.FindAll();
+            return Json(pharmacies, JsonRequestBehavior.AllowGet);
         }
     }
 }

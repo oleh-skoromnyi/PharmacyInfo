@@ -19,41 +19,40 @@ namespace PharmacyInfo.DataAccessLayer
         public void AddEntity(Patient entity)
         {
             var connection = new SqlConnection(_connectionString);
-            var command = new SqlCommand(addStoredProcedureName, connection);
+            using (var command = new SqlCommand(addStoredProcedureName, connection))
+            {
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@FirstName", entity.FirstName);
+                command.Parameters.AddWithValue("@LastName", entity.LastName);
+                command.Parameters.AddWithValue("@PharmacyAssignDate", entity.PharmacyAssignDate);
+                command.Parameters.AddWithValue("@PharmacyId", entity.PharmacyId);
 
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("@FirstName", entity.FirstName);
-            command.Parameters.AddWithValue("@LastName", entity.LastName);
-            command.Parameters.AddWithValue("@PharmacyAssignDate", entity.PharmacyAssignDate);
-            command.Parameters.AddWithValue("@PharmacyId", entity.PharmacyId);
-
-            connection.Open();
-            command.ExecuteNonQuery();
-            connection.Close();
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
         }
 
         public List<Patient> FindAll()
         {
             var connection = new SqlConnection(_connectionString);
-            var command = new SqlCommand(getStoredProcedureName, connection);
-
             var resultList = new List<Patient>();
 
-            command.CommandType = System.Data.CommandType.StoredProcedure;
-            connection.Open();
-            var reader = command.ExecuteReader();
-
-            foreach (var row in reader) 
+            using (var command = new SqlCommand(getStoredProcedureName, connection))
             {
-                var listItem = new Patient();
-                for (int i = 0; i < reader.FieldCount; ++i)
-                {
-                    typeof(Patient).GetProperty(reader.GetName(i))?.SetValue(listItem, reader.GetValue(i));
-                }
-                resultList.Add((Patient)listItem);
-            }
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                connection.Open();
+                var reader = command.ExecuteReader();
 
-            connection.Close();
+                foreach (var row in reader)
+                {
+                    var listItem = new Patient();
+                    for (int i = 0; i < reader.FieldCount; ++i)
+                    {
+                        typeof(Patient).GetProperty(reader.GetName(i))?.SetValue(listItem, reader.GetValue(i));
+                    }
+                    resultList.Add((Patient)listItem);
+                }
+            }
             return resultList;
         }
     }

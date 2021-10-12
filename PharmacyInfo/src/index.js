@@ -1,15 +1,11 @@
 ﻿import "./index.css";
-import "bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Vue from 'vue';
-import PatientList from './PatientList.vue';
-import PharmacyList from './PharmacyList.vue';
+
+import PharmacyInfoPage from './PharmacyInfoPage.vue';
 
 new Vue({
-    el: '#patientListApp',
-    render: h => h(PatientList),
-});
-new Vue({
-    el: '#pharmacyListApp',
-    render: h => h(PharmacyList),
-});
+    el: '#pharmacyInfoPage',
+    render: h => h(PharmacyInfoPage),
+})
