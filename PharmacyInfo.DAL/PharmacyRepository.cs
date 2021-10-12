@@ -18,9 +18,9 @@ namespace PharmacyInfo.DataAccessLayer
 
         public void AddEntity(Pharmacy entity)
         {
-            var connection = new SqlConnection(_connectionString);
-            using (var command = new SqlCommand(addStoredProcedureName, connection))
+            using (var connection = new SqlConnection(_connectionString))
             {
+                var command = new SqlCommand(addStoredProcedureName, connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@PharmacyName", entity.PharmacyName);
                 command.Parameters.AddWithValue("@StreetAddress", entity.StreetAddress);
@@ -35,10 +35,10 @@ namespace PharmacyInfo.DataAccessLayer
 
         public List<Pharmacy> FindAll()
         {
-            var connection = new SqlConnection(_connectionString);
             var resultList = new List<Pharmacy>();
-            using (var command = new SqlCommand(getStoredProcedureName, connection))
+            using (var connection = new SqlConnection(_connectionString))
             {
+                var command = new SqlCommand(getStoredProcedureName, connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 connection.Open();
                 var reader = command.ExecuteReader();

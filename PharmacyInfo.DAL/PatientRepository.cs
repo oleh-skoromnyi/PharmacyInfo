@@ -18,9 +18,9 @@ namespace PharmacyInfo.DataAccessLayer
 
         public void AddEntity(Patient entity)
         {
-            var connection = new SqlConnection(_connectionString);
-            using (var command = new SqlCommand(addStoredProcedureName, connection))
+            using (var connection = new SqlConnection(_connectionString))
             {
+                var command = new SqlCommand(addStoredProcedureName, connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@FirstName", entity.FirstName);
                 command.Parameters.AddWithValue("@LastName", entity.LastName);
@@ -34,11 +34,11 @@ namespace PharmacyInfo.DataAccessLayer
 
         public List<Patient> FindAll()
         {
-            var connection = new SqlConnection(_connectionString);
             var resultList = new List<Patient>();
 
-            using (var command = new SqlCommand(getStoredProcedureName, connection))
+            using (var connection = new SqlConnection(_connectionString))
             {
+                var command = new SqlCommand(getStoredProcedureName, connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 connection.Open();
                 var reader = command.ExecuteReader();
