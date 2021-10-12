@@ -19,6 +19,8 @@ footer {
     flex-direction: column;
     min-height: 100vh;
     height: auto !important;
+    min-width: 100vw;
+    width: max-content;
     align-items: stretch;
 }
 
