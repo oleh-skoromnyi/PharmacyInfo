@@ -132,7 +132,6 @@
     <Content Include="dist\bundle.js.LICENSE.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="index.html" />
     <Content Include="src\PharmacyInfoPage.vue" />
     <None Include="src\PharmacyInfoTableWithPaging.vue" />
     <Content Include="src\index.css" />

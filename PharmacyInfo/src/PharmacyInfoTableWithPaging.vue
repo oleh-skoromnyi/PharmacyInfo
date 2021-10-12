@@ -10,8 +10,7 @@
             <span>One month</span>
 
             <input type="radio" id="threeMonthesToFilter" value='3' v-on:click="ResetPage" v-model="numberOfMonthToFilter">
-            <span>Three month</span>
-
+            <span>Three months</span>
         </div>
         <table class="table">
             <thead class="dark-cyan-background">
@@ -31,7 +30,6 @@
                 </td>
             </tr>
         </table>
-
         <div class="d-flex page-buttons-panel">
             <button class="btn btn-light" v-on:click="PreviousPage()" v-bind:disabled="this.page <= 0">PreviousPage</button>
             <label class="page-number">{{this.page+1}}</label>
@@ -41,7 +39,6 @@
 </template>
 
 <script>
-
     import axios from 'axios';
 
     function filterPatientByMonth(patient, numberOfMonthToFilter) {
