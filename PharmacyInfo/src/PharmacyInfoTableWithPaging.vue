@@ -157,6 +157,6 @@
 
     .content {
         flex: 2 0 auto;
-        margin-block-end: 60px;
+        margin-block-end: 10px;
     }
 </style>
