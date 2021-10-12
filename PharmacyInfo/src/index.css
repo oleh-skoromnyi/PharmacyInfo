@@ -3,8 +3,6 @@
 }
 
 body {
-    display: flex;
-    flex-direction: column;
     min-height: 100%;
 }
 
@@ -17,6 +15,8 @@ footer {
 }
 
 .body-content {
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
     height: auto !important;
     align-items: stretch;

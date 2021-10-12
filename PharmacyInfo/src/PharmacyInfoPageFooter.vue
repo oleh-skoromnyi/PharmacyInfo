@@ -22,10 +22,8 @@
 
     .page-footer {
         margin: 0px;
-        position:fixed;
-        bottom:0;
-        height:60px;
         padding: 15px;
-        width: 100vw;
+        min-width: 100vw;
+        min-width: max-content;
     }
 </style>
