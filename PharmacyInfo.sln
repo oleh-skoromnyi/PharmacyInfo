@@ -13,9 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmasyInfo.Core", "Pharma
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PharmacySql", "PharmacySql", "{62FA70AE-1FCE-4904-ACA5-72486C325056}"
 	ProjectSection(SolutionItems) = preProject
+		AlterTableToManyToMany.sql = AlterTableToManyToMany.sql
 		PharmacySql\CreatePatientProcedureCreatingScript.sql = PharmacySql\CreatePatientProcedureCreatingScript.sql
 		PharmacySql\CreatePharmacyProcedureCreatingScript.sql = PharmacySql\CreatePharmacyProcedureCreatingScript.sql
-		PharmacySql\GetPharmaciesAndGetPatientsProcedureCreatingScript.sql = PharmacySql\GetPharmaciesAndGetPatientsProcedureCreatingScript.sql
+		PharmacySql\GetPatientsProcedureCreatingScript.sql = PharmacySql\GetPatientsProcedureCreatingScript.sql
+		PharmacySql\GetPharmaciesProcedureCreatingScript.sql = PharmacySql\GetPharmaciesProcedureCreatingScript.sql
 		PharmacySql\PatientTableCreatingScript.sql = PharmacySql\PatientTableCreatingScript.sql
 		PharmacySql\PharmaciesTableCreatingScript.sql = PharmacySql\PharmaciesTableCreatingScript.sql
 		PharmacySql\PharmacyInfo.bacpac = PharmacySql\PharmacyInfo.bacpac

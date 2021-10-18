@@ -20,7 +20,7 @@ namespace PharmacyInfo.Controllers
         public JsonResult Patients()
         {
             var patients = patientRepository.FindAll();
-            return Json(patients,JsonRequestBehavior.AllowGet);
+            return Json(patients, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
@@ -28,6 +28,18 @@ namespace PharmacyInfo.Controllers
         {
             var pharmacies = pharmasyRepository.FindAll();
             return Json(pharmacies, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult PutPatients(List<Patient> json)
+        {
+            Console.WriteLine(json);
+            return Json("Ok", JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult PutPharmacies(List<Pharmacy> json)
+        {
+            Console.WriteLine(json);
+            return Json("Ok", JsonRequestBehavior.AllowGet);
         }
     }
 }

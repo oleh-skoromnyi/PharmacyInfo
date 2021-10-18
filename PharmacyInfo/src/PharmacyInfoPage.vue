@@ -11,6 +11,8 @@
     import PharmacyInfoPageHeader from './PharmacyInfoPageHeader.vue';
     import PharmacyInfoTableWithPaging from './PharmacyInfoTableWithPaging.vue';
 
+    
+
     export default {
         components: {
             PharmacyInfoPageFooter,

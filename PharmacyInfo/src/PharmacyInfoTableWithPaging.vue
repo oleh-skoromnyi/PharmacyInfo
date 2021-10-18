@@ -1,122 +1,136 @@
 ﻿<template>
     <div class="justify-content-center content">
-        <div class="form-check form-check-inline flex filter dark-cyan-background" v-if="this.itemType === 'Patients'">
+        <div class="form-check form-check-inline flex filter dark-cyan-background"
+             v-if="itemType === 'Patients'">
             <span>Filter date: </span>
 
-            <input type="radio" id="zeroMonthToFilter" value='0' v-on:click="ResetPage" v-model="numberOfMonthToFilter">
+            <input type="radio"
+                   id="zeroMonthToFilter"
+                   value='0'
+                   v-on:click="resetPage(0)"
+                   v-bind:checked="numberOfMonthToFilter === 0">
             <span>No</span>
 
-            <input type="radio" id="oneMonthToFilter" value='1' v-on:click="ResetPage" v-model="numberOfMonthToFilter">
+            <input type="radio"
+                   id="oneMonthToFilter"
+                   value='1'
+                   v-on:click="resetPage(1)"
+                   v-bind:checked="numberOfMonthToFilter === 1">
             <span>One month</span>
 
-            <input type="radio" id="threeMonthesToFilter" value='3' v-on:click="ResetPage" v-model="numberOfMonthToFilter">
+            <input type="radio"
+                   id="threeMonthesToFilter"
+                   value='3'
+                   v-on:click="resetPage(3)"
+                   v-bind:checked="numberOfMonthToFilter === 3">
             <span>Three months</span>
         </div>
         <table class="table">
             <thead class="dark-cyan-background">
                 <tr>
-                    <th scope="col" class="table-header" v-for="(value, name) in getPagging[0]">
-                        <p v-if="name !== 'PharmacyId' && name !== 'Id'">
+                    <th scope="col"
+                        class="table-header"
+                        v-for="(value, name) in getPagging[0]">
+                        <p class="table-item table-header" 
+                           v-if="name !== 'PharmacyId' && name !== 'Id'">
                             {{name}}
                         </p>
                     </th>
                 </tr>
             </thead>
-            <tr v-for="item in getPagging">
-                <td v-for="(value, name) in item">
-                    <p class="table-item" v-if="name !== 'PharmacyId' && name !== 'Id'">
-                        {{value}}
-                    </p>
-                </td>
-            </tr>
+            <tbody>
+                <tr v-for="item in getPagging">
+                    <td v-for="(value, name) in item">
+                        <p class="table-item"
+                           v-if="name !== 'PharmacyId' && name !== 'Patients' && name !== 'Pharmacies' && name !== 'Id'">
+                            {{value}}
+                        </p>
+                        <div class="dropdown"
+                             v-if="name === 'Pharmacies'">
+                            <button class="btn btn-secondary dropdown-button"
+                                    v-on:click="showDropdown(item.Id)" type="button">
+                                Pharmacies
+                            </button>
+                            <div class="dropdown-menu"
+                                 v-bind:id='"pharmaciesDropdown"+item.Id'>
+                                <div class="dropdown-item"
+                                     v-for="pharmacy in getPharmacies">
+                                    <input type="checkbox"
+                                           v-on:change="changePatientPharmacies({patientId:item.Id,pharmacyId:pharmacy.Id})"
+                                           class="dropdown-item-checkbox" value="pharmacy.Id"
+                                           v-bind:checked="value.filter(e => e.PharmacyId === pharmacy.Id).length > 0">
+                                    {{pharmacy.PharmacyName}}
+                                </div>
+                            </div>
+                        </div>
+                        <div v-if="name === 'Patients'">
+                            <p class="table-item"
+                               v-for="patient in value">
+                                {{patient.FirstName +' '+ patient.LastName+'; '}}
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
         </table>
         <div class="d-flex page-buttons-panel">
-            <button class="btn btn-light" v-on:click="PreviousPage()" v-bind:disabled="this.page <= 0">PreviousPage</button>
-            <label class="page-number">{{this.page+1}}</label>
-            <button class="btn btn-light" v-on:click="NextPage()" v-bind:disabled="this.page >= getPageCount ">NextPage</button>
+            <button class="btn btn-light" 
+                    v-on:click="previousPage()" 
+                    v-bind:disabled="page <= 0">PreviousPage</button>
+            <label class="page-number">{{page+1}}</label>
+            <button class="btn btn-light" 
+                    v-on:click="nextPage()" 
+                    v-bind:disabled="page >= getPageCount">NextPage</button>
         </div>
     </div>
 </template>
 
 <script>
-    import axios from 'axios';
+    import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
 
-    function filterPatientByMonth(patient, numberOfMonthToFilter) {
-        var patientDate = new Date(new Date(patient.PharmacyAssignDate).setDate(1));
-        var currentDate = new Date(new Date().setDate(1));
-        if (currentDate.getMonth() + 1 > numberOfMonthToFilter) {
-            var filteredDate = new Date(currentDate.getFullYear(), +currentDate.getMonth() - numberOfMonthToFilter);
+    window.$ = require('jquery');
+
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropdown-item') && !event.target.matches('.dropdown-button') && !event.target.matches('.dropdown-item-checkbox')) {
+            $(".dropdown-menu").removeClass("show");
         }
-        else {
-            var filteredDate = new Date(currentDate.getFullYear() - 1, +currentDate.getMonth() + 12 - numberOfMonthToFilter);
-        }
-        return patientDate.getTime() > filteredDate.getTime();
-    };
+    }
 
     export default {
-        data: function () {
-            return {
-                page: 0,
-                items: [],
-                itemType: 'Patients',
-                numberOfMonthToFilter: '0'
-            }
-        },
         created: async function () {
-            var locationPartList = window.location.pathname.split('/');
-            var currentAction = locationPartList[locationPartList.length - 1].split('.')[0];
-            var result;
-            await axios.get('/Home/' + currentAction).then(function (response) {
-                console.log(response);
-                result = response.data;
-            });
-            this.items = result;
-            this.itemType = currentAction;
-            if (this.itemType === 'Patients') {
-                this.items.forEach(function (patient) {
-                    var date = new Date(+patient.PharmacyAssignDate.substring(6, patient.PharmacyAssignDate.length - 2));
-                    patient = patient.PharmacyAssignDate = date.getFullYear() + '-' + (date.getMonth() + 1) + "-" + date.getDate();
-                });
-            }
-            console.log(this);
+            this.getDataFromSource();
         },
         methods: {
-            NextPage() {
-                this.page += 1;
-            },
-            PreviousPage() {
-                this.page -= 1;
-            },
-            ResetPage() {
-                this.page = 0;
-            },
+            ...mapMutations({
+                nextPage: 'pageModule/nextPage',
+                previousPage: 'pageModule/previousPage',
+                changeItem: 'changeItem'
+            }),
+            ...mapActions({
+                getDataFromSource: 'getDataFromSource',
+                changePatientPharmacies: 'changePatientPharmacies',
+                changeItemsType: 'changeItemsType',
+                resetPage: 'resetPage'
+            }),
+            showDropdown(id) {
+                $("#pharmaciesDropdown" + id).addClass("show");
+            }
         },
         computed:
         {
-            getFiltered() {
-                if (this.numberOfMonthToFilter === '0' || this.itemType !== 'Patients') {
-                    return this.items;
-                }
-                else {
-                    return this.items.filter(patient => filterPatientByMonth(patient, this.numberOfMonthToFilter));
-                }
-            },
-            getPageCount() {
-                return Math.floor(this.getFiltered.length / 10);
-            },
-            getPagging() {
-
-
-                if (this.page > this.getFiltered.length / 10) {
-                    return this.getFiltered.slice(0);
-                }
-                else {
-                    return this.getFiltered.slice(this.page * 10, (this.page + 1) * 10);
-                }
-            },
-            getSorted() {
-                return this.getFiltered.sort();
-            }
+            ...mapState({
+                page: state => state.pageModule.page,
+                items: state => state.items,
+                itemType: state => state.itemType,
+                numberOfMonthToFilter: state => state.numberOfMonthToFilter,
+            }),
+            ...mapGetters({
+                getFiltered: 'getFiltered',
+                getPageCount: 'getPageCount',
+                getPagging: 'getPagging',
+                getSorted: 'getSorted',
+                getPharmacies: 'getPharmacies'
+            })
         }
     }
 </script>
@@ -125,6 +139,10 @@
     .dark-cyan-background {
         color: antiquewhite;
         background-color: darkcyan;
+    }
+
+    .table-header {
+        color: antiquewhite;
     }
 
     .form-check {
@@ -158,5 +176,25 @@
     .content {
         flex: 2 0 auto;
         margin-block-end: 10px;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        height: 140px;
+        overflow: auto;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .show {
+        display: block;
     }
 </style>

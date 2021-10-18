@@ -1,4 +1,6 @@
-﻿namespace PharmacyInfo.Core.Entities
+﻿using System.Collections.Generic;
+
+namespace PharmacyInfo.Core.Entities
 {
     public class Pharmacy
     {
@@ -8,5 +10,6 @@
         public int StateCode { get; set; }
         public string ZipCode { get; set; }
         public string PhoneNumber { get; set; }
+        public List<PatientInfo> Patients { get; set; }
     }
 }
