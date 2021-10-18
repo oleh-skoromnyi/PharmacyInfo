@@ -47,7 +47,7 @@
                         </p>
                         <div class="dropdown"
                              v-if="name === 'Pharmacies'">
-                            <button class="btn btn-secondary dropdown-button"
+                            <button class="btn btn-info dropdown-button"
                                     v-on:click="showDropdown(item.Id)" type="button">
                                 Pharmacies
                             </button>
