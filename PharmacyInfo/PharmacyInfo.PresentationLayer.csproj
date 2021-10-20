@@ -127,21 +127,28 @@
     <Content Include="dist\bundle.js.LICENSE.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Pharmacies.html" />
+    <None Include="src\PharmacyInfoPharmaciesPage.vue" />
+    <Content Include="src\store\namespacedTypes.js" />
+    <Content Include="src\store\patients.js" />
+    <Content Include="src\store\pharmacies.js" />
     <Content Include="src\store\storeActions.js" />
     <Content Include="src\store\storeGetters.js" />
     <Content Include="src\store\storeMutations.js" />
-    <Content Include="src\store\storePageModule.js" />
-    <Content Include="src\PharmacyInfoPage.vue" />
-    <None Include="src\PharmacyInfoTableWithPaging.vue" />
+    <Content Include="src\store\page.js" />
+    <Content Include="src\PharmacyInfoPatientsPage.vue" />
+    <None Include="src\PharmacyInfoPharmaciesList.vue" />
     <Content Include="src\index.css" />
     <Content Include="src\index.js" />
-    <Content Include="PharmacyInfo.html" />
+    <Content Include="Patients.html" />
     <Content Include="src\store\store.js" />
+    <Content Include="src\store\types.js" />
     <Content Include="webpack.config.js" />
     <Content Include="package.json" />
     <Content Include="src\PharmacyInfoPageHeader.vue" />
     <Content Include="src\PharmacyInfoPageFooter.vue" />
     <Content Include="Web.config" />
+    <Content Include="src\PharmacyInfoPatientsList.vue" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

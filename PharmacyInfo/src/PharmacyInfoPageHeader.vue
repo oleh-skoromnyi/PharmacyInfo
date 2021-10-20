@@ -1,12 +1,12 @@
 ﻿<template>
     <header>
         <nav class="navbar navbar-expand-lg scrolling-navbar">
-            <a class="navbar-brand" v-on:click="changeItemsType('Patients')" href="#">Pharmacy Info</a>
+            <a class="navbar-brand" href="../Patients.html">Pharmacy Info</a>
             <div class="nav-item">
-                <a class="nav-link" v-on:click="changeItemsType('Patients')" href="#">Patients</a>
+                <a class="nav-link" href="../Patients.html">Patients</a>
             </div>
             <div class="nav-item">
-                <a class="nav-link" v-on:click="changeItemsType('Pharmacies')" href="#">Pharmacies</a>
+                <a class="nav-link" href="../Pharmacies.html">Pharmacies</a>
             </div>
         </nav>
     </header>
@@ -14,21 +14,7 @@
 
 
 <script>
-    import { mapActions, mapState} from 'vuex'
-
-    export default {
-        methods: {
-            ...mapActions({
-                changeItemsType: 'changeItemsType',
-            })
-        },
-        computed:
-        {
-            ...mapState({
-                itemType: state => state.itemType
-            })
-        }
-    }
+    export default {}
 </script>
 
 <style scoped>

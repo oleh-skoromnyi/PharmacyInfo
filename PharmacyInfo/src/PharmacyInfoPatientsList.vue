@@ -1,27 +1,26 @@
 ﻿<template>
     <div class="justify-content-center content">
-        <div class="form-check form-check-inline flex filter dark-cyan-background"
-             v-if="itemType === 'Patients'">
+        <div class="form-check form-check-inline flex filter dark-cyan-background">
             <span>Filter date: </span>
 
             <input type="radio"
                    id="zeroMonthToFilter"
                    value='0'
-                   v-on:click="resetPage(0)"
+                   v-on:click="setNumberOfMonthToFilter(0)"
                    v-bind:checked="numberOfMonthToFilter === 0">
             <span>No</span>
 
             <input type="radio"
                    id="oneMonthToFilter"
                    value='1'
-                   v-on:click="resetPage(1)"
+                   v-on:click="setNumberOfMonthToFilter(1)"
                    v-bind:checked="numberOfMonthToFilter === 1">
             <span>One month</span>
 
             <input type="radio"
                    id="threeMonthesToFilter"
                    value='3'
-                   v-on:click="resetPage(3)"
+                   v-on:click="setNumberOfMonthToFilter(3)"
                    v-bind:checked="numberOfMonthToFilter === 3">
             <span>Three months</span>
         </div>
@@ -29,24 +28,50 @@
             <thead class="dark-cyan-background">
                 <tr>
                     <th scope="col"
-                        class="table-header"
-                        v-for="(value, name) in getPagging[0]">
-                        <p class="table-item table-header" 
-                           v-if="name !== 'PharmacyId' && name !== 'Id'">
-                            {{name}}
+                        class="table-header">
+                        <p class="table-item table-header">
+                            First name
+                        </p>
+                    </th>
+                    <th scope="col"
+                        class="table-header">
+                        <p class="table-item table-header">
+                            Last name
+                        </p>
+                    </th>
+                    <th scope="col"
+                        class="table-header">
+                        <p class="table-item table-header">
+                            Pharmacy assigned date
+                        </p>
+                    </th>
+                    <th scope="col"
+                        class="table-header">
+                        <p class="table-item table-header">
+                            Pharmacies
                         </p>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in getPagging">
-                    <td v-for="(value, name) in item">
-                        <p class="table-item"
-                           v-if="name !== 'PharmacyId' && name !== 'Patients' && name !== 'Pharmacies' && name !== 'Id'">
-                            {{value}}
+                <tr v-for="item in getPatients">
+                    <td>
+                        <p class="table-item">
+                            {{item.FirstName}}
                         </p>
-                        <div class="dropdown"
-                             v-if="name === 'Pharmacies'">
+                    </td>
+                    <td>
+                        <p class="table-item">
+                            {{item.LastName}}
+                        </p>
+                    </td>
+                    <td>
+                        <p class="table-item">
+                            {{item.PharmacyAssignDate}}
+                        </p>
+                    </td>
+                    <td>
+                        <div class="dropdown">
                             <button class="btn btn-info dropdown-button"
                                     v-on:click="showDropdown(item.Id)" type="button">
                                 Pharmacies
@@ -56,61 +81,61 @@
                                 <div class="dropdown-item"
                                      v-for="pharmacy in getPharmacies">
                                     <input type="checkbox"
-                                           v-on:change="changePatientPharmacies({patientId:item.Id,pharmacyId:pharmacy.Id})"
+                                           v-on:change="assignPatientToPharmacy({patientId:item.Id,pharmacyId:pharmacy.Id})"
                                            class="dropdown-item-checkbox" value="pharmacy.Id"
-                                           v-bind:checked="value.filter(e => e.PharmacyId === pharmacy.Id).length > 0">
+                                           v-bind:checked="item.Pharmacies.filter(e => e.PharmacyId === pharmacy.Id).length > 0">
                                     {{pharmacy.PharmacyName}}
                                 </div>
                             </div>
-                        </div>
-                        <div v-if="name === 'Patients'">
-                            <p class="table-item"
-                               v-for="patient in value">
-                                {{patient.FirstName +' '+ patient.LastName+'; '}}
-                            </p>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
         <div class="d-flex page-buttons-panel">
-            <button class="btn btn-light" 
-                    v-on:click="previousPage()" 
-                    v-bind:disabled="page <= 0">PreviousPage</button>
+            <button class="btn btn-light"
+                    v-on:click="previousPage()"
+                    v-bind:disabled="page <= 0">
+                PreviousPage
+            </button>
             <label class="page-number">{{page+1}}</label>
-            <button class="btn btn-light" 
-                    v-on:click="nextPage()" 
-                    v-bind:disabled="page >= getPageCount">NextPage</button>
+            <button class="btn btn-light"
+                    v-on:click="nextPage()"
+                    v-bind:disabled="page >= getPageCount">
+                NextPage
+            </button>
         </div>
     </div>
 </template>
 
 <script>
-    import { mapState, mapMutations, mapGetters, mapActions } from 'vuex'
+    import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
+    import { getters, mutations, actions } from './store/namespacedTypes.js';
 
     window.$ = require('jquery');
 
-    window.onclick = function (event) {
-        if (!event.target.matches('.dropdown-item') && !event.target.matches('.dropdown-button') && !event.target.matches('.dropdown-item-checkbox')) {
+    window.addEventListener('click', function (event) {
+        if (!event.target.matches('.dropdown-item')
+            && !event.target.matches('.dropdown-button')
+            && !event.target.matches('.dropdown-item-checkbox')) {
             $(".dropdown-menu").removeClass("show");
         }
-    }
+    });
 
     export default {
         created: async function () {
-            this.getDataFromSource();
+            this.initialization();
         },
         methods: {
             ...mapMutations({
-                nextPage: 'pageModule/nextPage',
-                previousPage: 'pageModule/previousPage',
-                changeItem: 'changeItem'
+                nextPage: mutations.PATIENTS_NEXT_PAGE,
+                previousPage: mutations.PATIENTS_PREVIOUS_PAGE,
+                resetPage: mutations.PATIENTS_RESET_PAGE
             }),
             ...mapActions({
-                getDataFromSource: 'getDataFromSource',
-                changePatientPharmacies: 'changePatientPharmacies',
-                changeItemsType: 'changeItemsType',
-                resetPage: 'resetPage'
+                assignPatientToPharmacy: actions.ASSIGN_PATIENT_TO_PHARMACY, 
+                setNumberOfMonthToFilter: actions.CHANGE_NUMBER_OF_MONTH_TO_FILTER,
+                initialization: actions.INITIALIZATION
             }),
             showDropdown(id) {
                 $("#pharmaciesDropdown" + id).addClass("show");
@@ -119,17 +144,14 @@
         computed:
         {
             ...mapState({
-                page: state => state.pageModule.page,
-                items: state => state.items,
-                itemType: state => state.itemType,
-                numberOfMonthToFilter: state => state.numberOfMonthToFilter,
+                page: state => state.Patients.Page.page,
+                patients: state => state.Patients.patients,
+                numberOfMonthToFilter: state => state.Patients.numberOfMonthToFilter,
             }),
             ...mapGetters({
-                getFiltered: 'getFiltered',
-                getPageCount: 'getPageCount',
-                getPagging: 'getPagging',
-                getSorted: 'getSorted',
-                getPharmacies: 'getPharmacies'
+                getPageCount: getters.GET_PATIENTS_PAGE_COUNT,
+                getPatients: getters.PATIENTS_AT_CURRENT_PAGE,
+                getPharmacies: getters.PHARMACIES,
             })
         }
     }
@@ -187,7 +209,7 @@
         display: none;
         position: absolute;
         background-color: #f1f1f1;
-        min-width: 160px;
+        min-width: 140px;
         height: 140px;
         overflow: auto;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);

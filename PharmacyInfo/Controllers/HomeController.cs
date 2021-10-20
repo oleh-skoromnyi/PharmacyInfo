@@ -17,14 +17,14 @@ namespace PharmacyInfo.Controllers
         IRepository<Pharmacy> pharmasyRepository = new PharmacyRepository(connectionString);
 
         [HttpGet]
-        public JsonResult Patients()
+        public JsonResult GetPatients()
         {
             var patients = patientRepository.FindAll();
             return Json(patients, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
-        public JsonResult Pharmacies()
+        public JsonResult GetPharmacies()
         {
             var pharmacies = pharmasyRepository.FindAll();
             return Json(pharmacies, JsonRequestBehavior.AllowGet);
