@@ -1,14 +1,11 @@
 ﻿import {
     getters as $G,
     mutations as $M,
-    actions as $A
-} from './types';
+    actions as $A,
+    namespacedGetters as $NG,
+    namespacedMutations as $NM
+} from './types.js';
 
-import {
-    getters as $NG,
-    mutations as $NM,
-    actions as $NA
-} from './namespacedTypes';
 
 import Page from './page.js';
 import axios from 'axios';

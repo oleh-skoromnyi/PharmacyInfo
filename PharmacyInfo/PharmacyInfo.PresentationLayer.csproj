@@ -129,7 +129,6 @@
     <Content Include="Global.asax" />
     <Content Include="Pharmacies.html" />
     <None Include="src\PharmacyInfoPharmaciesPage.vue" />
-    <Content Include="src\store\namespacedTypes.js" />
     <Content Include="src\store\patients.js" />
     <Content Include="src\store\pharmacies.js" />
     <Content Include="src\store\page.js" />

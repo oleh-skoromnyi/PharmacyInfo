@@ -3,16 +3,11 @@
 import Patients from './patients.js';
 import Pharmacies from './pharmacies.js';
 import {
-    getters as $G,
-    mutations as $M,
-    actions as $A
+    actions as $A,
+    namespacedActions as $NA,
+    namespacedGetters as $NG,
+    namespacedMutations as $NM,
 } from './types.js';
-
-import {
-    actions as $NA,
-    getters as $NG,
-    mutations as $NM,
-} from './namespacedTypes';
 
 export default {
     modules: {

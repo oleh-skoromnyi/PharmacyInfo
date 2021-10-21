@@ -94,7 +94,11 @@
 
 <script>
     import { mapState, mapMutations, mapGetters, mapActions } from 'vuex';
-    import { getters, mutations, actions } from './store/namespacedTypes.js';
+    import {
+        namespacedActions as actions,
+        namespacedGetters as getters,
+        namespacedMutations as mutations,
+    } from './store/types.js';
 
     window.$ = require('jquery');
 
