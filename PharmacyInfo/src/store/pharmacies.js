@@ -32,7 +32,7 @@ export const getters = {
     [$G.PHARMACIES](state) {
         return state.pharmacies || [];
     },
-    [$G.NUMBER_OF_PHARMACIES](state,getters) {
+    [$G.PHARMACIES_COUNT](state,getters) {
         if (state.pharmacies) {
             return getters[$G.PHARMACIES].length;
         }
@@ -40,16 +40,16 @@ export const getters = {
             return 0;
         }
     },
-    [$G.GET_PHARMACIES_PAGE_COUNT](state,getters) {
-        return Math.floor(getters[$G.NUMBER_OF_PHARMACIES] / getters[$NG.PHARMACIES_PAGE_PAGE_SIZE]);
+    [$G.PHARMACIES_PAGE_COUNT](state,getters) {
+        return Math.floor(getters[$G.PHARMACIES_COUNT] / getters[$NG.PAGE_PAGE_SIZE]);
     },
     [$G.PHARMACIES_AT_CURRENT_PAGE](state, getters) {
-        return getters[$G.PHARMACIES].slice(getters[$NG.PHARMACIES_PAGE_ITEMS_FROM], getters[$NG.PHARMACIES_PAGE_ITEMS_TO]);
+        return getters[$G.PHARMACIES].slice(getters[$NG.PAGE_ITEMS_FROM], getters[$NG.PAGE_ITEMS_TO]);
     },
     [$G.PHARMACY_INDEX]: (state) => (PharmacyId) => {
         return findIndex(state.pharmacies, PharmacyId, PHARMACY_ID_PROPERTY_NAME);
     },
-    [$G.RELATED_TO_PHARMACY_PATIENT_INDEX]: (state, getters) => (PharmacyId, PatientId) => {
+    [$G.PHARMACY_RELATED_PATIENT_INDEX]: (state, getters) => (PharmacyId, PatientId) => {
         return findIndex(state.pharmacies[getters[$G.PHARMACY_INDEX](PharmacyId)].Patients, PatientId, RELATED_PATIENT_ID_PROPERTY_NAME);
     },
     [$G.GET_PHARMACY_BY_ID]: (state, getters) => (PharmacyId) => {

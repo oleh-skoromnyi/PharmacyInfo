@@ -1,4 +1,6 @@
-﻿import Patients from './patients.js';
+﻿/// <reference path="namespacedtypes.js" />
+/// <reference path="namespacedtypes.js" />
+import Patients from './patients.js';
 import Pharmacies from './pharmacies.js';
 import {
     getters as $G,
@@ -23,8 +25,8 @@ export default {
             var pharmacyIndex = context.getters[$NG.PHARMACY_INDEX](payload.pharmacyId);
 
             if (context.getters[$NG.IS_PATIENT_ASSIGNED_TO_PHARMACY](payload.patientId, payload.pharmacyId)) {
-                var relatedPatientIndex = context.getters[$NG.RELATED_TO_PHARMACY_PATIENT_INDEX](payload.pharmacyId, payload.patientId);
-                var relatedPharmacyIndex = context.getters[$NG.RELATED_TO_PATIENT_PHARMACY_INDEX](payload.patientId, payload.pharmacyId);
+                var relatedPatientIndex = context.getters[$NG.PHARMACY_RELATED_PATIENT_INDEX](payload.pharmacyId, payload.patientId);
+                var relatedPharmacyIndex = context.getters[$NG.PATIENT_RELATED_PHARMACY_INDEX](payload.patientId, payload.pharmacyId);
 
                 context.commit($NM.PATIENT_REMOVE_PHARMACY,
                     {

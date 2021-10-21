@@ -52,7 +52,7 @@ export const getters = {
             return state.patients.filter(patient => filterPatientByMonth(patient, state.numberOfMonthToFilter)) || [];
         }
     },
-    [$G.NUMBER_OF_PATIENTS](state,getters) {
+    [$G.PATIENTS_COUNT](state,getters) {
         if (state.patients) {
             return getters[$G.FILTERED_PATIENTS].length;
         }
@@ -61,19 +61,19 @@ export const getters = {
         }
     },
 
-    [$G.GET_PATIENTS_PAGE_COUNT](state, getters) {
-        return Math.floor(getters[$G.NUMBER_OF_PATIENTS] / getters[$NG.PATIENTS_PAGE_PAGE_SIZE]);
+    [$G.PATIENTS_PAGE_COUNT](state, getters) {
+        return Math.floor(getters[$G.PATIENTS_COUNT] / getters[$NG.PAGE_PAGE_SIZE]);
     },
     [$G.PATIENTS_AT_CURRENT_PAGE](state, getters) {
-        return getters[$G.FILTERED_PATIENTS].slice(getters[$NG.PATIENTS_PAGE_ITEMS_FROM], getters[$NG.PATIENTS_PAGE_ITEMS_TO]);
+        return getters[$G.FILTERED_PATIENTS].slice(getters[$NG.PAGE_ITEMS_FROM], getters[$NG.PAGE_ITEMS_TO]);
     },
     [$G.IS_PATIENT_ASSIGNED_TO_PHARMACY]: (state, getters) => (PatientId, PharmacyId) => {
-        return getters[$G.RELATED_TO_PATIENT_PHARMACY_INDEX](PatientId, PharmacyId) !== -1
+        return getters[$G.PATIENT_RELATED_PHARMACY_INDEX](PatientId, PharmacyId) !== -1
     },
     [$G.PATIENT_INDEX]: (state) => (PatientId) => {
         return findIndex(state.patients, PatientId, PATIENT_ID_PROPERTY_NAME);
     },
-    [$G.RELATED_TO_PATIENT_PHARMACY_INDEX]: (state, getters) => (PatientId, PharmacyId) => {
+    [$G.PATIENT_RELATED_PHARMACY_INDEX]: (state, getters) => (PatientId, PharmacyId) => {
         return findIndex(state.patients[getters[$G.PATIENT_INDEX](PatientId)].Pharmacies, PharmacyId, RELATED_PHARMACY_ID_PROPERTY_NAME);
     },
     [$G.GET_PATIENT_BY_ID]: (state, getters) => (PatientId) => {
@@ -120,7 +120,7 @@ export const actions = {
     },
     [$A.CHANGE_NUMBER_OF_MONTH_TO_FILTER](context, payload){
         context.commit($M.SET_NUMBER_OF_MONTH_TO_FILTER, payload);
-        context.commit($NM.PATIENTS_PAGE_RESET_PAGE);
+        context.commit($NM.PAGE_RESET_PAGE);
     }
 }
 

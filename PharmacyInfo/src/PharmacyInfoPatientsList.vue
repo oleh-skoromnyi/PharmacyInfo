@@ -149,7 +149,7 @@
                 numberOfMonthToFilter: state => state.Patients.numberOfMonthToFilter,
             }),
             ...mapGetters({
-                getPageCount: getters.GET_PATIENTS_PAGE_COUNT,
+                getPageCount: getters.PATIENTS_PAGE_COUNT,
                 getPatients: getters.PATIENTS_AT_CURRENT_PAGE,
                 getPharmacies: getters.PHARMACIES,
             })

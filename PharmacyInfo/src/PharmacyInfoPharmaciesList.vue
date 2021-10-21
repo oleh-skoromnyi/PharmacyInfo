@@ -121,7 +121,7 @@
                 page: state => state.Pharmacies.Page.page
             }),
             ...mapGetters({
-                getPageCount: getters.GET_PHARMACIES_PAGE_COUNT,
+                getPageCount: getters.PHARMACIES_PAGE_COUNT,
                 getPharmacies: getters.PHARMACIES_AT_CURRENT_PAGE,
             })
         }
