@@ -26,16 +26,16 @@ export default {
                 var relatedPatientIndex = context.getters[$NG.RELATED_TO_PHARMACY_PATIENT_INDEX](payload.pharmacyId, payload.patientId);
                 var relatedPharmacyIndex = context.getters[$NG.RELATED_TO_PATIENT_PHARMACY_INDEX](payload.patientId, payload.pharmacyId);
 
-                context.commit($NM.RELEASE_PHARMACY_FROM_PATIENT,
+                context.commit($NM.PATIENT_REMOVE_PHARMACY,
                     {
                         patientIndex: patientIndex,
                         pharmacyIndex: relatedPharmacyIndex
                     });
 
-                context.commit($NM.REMOVE_PATIENT_FROM_PHARMACY,
+                context.commit($NM.PHARMACY_REMOVE_PATIENT,
                     {
-                        patientIndex: patientIndex,
-                        pharmacyIndex: relatedPatientIndex
+                        patientIndex: relatedPatientIndex,
+                        pharmacyIndex: pharmacyIndex
                     });
             }
             else {
@@ -52,13 +52,13 @@ export default {
                     PharmacyId: payload.pharmacyId,
                     PharmacyName: pharmacy.PharmacyName
                 };
-                context.commit($NM.ASSIGN_PHARMACY_TO_PATIENT,
+                context.commit($NM.PATIENT_ADD_PHARMACY,
                     {
                         patientIndex: patientIndex,
                         pharmacy: payloadPharmacy
                     });
 
-                context.commit($NM.ADD_PATIENT_TO_PHARMACY,
+                context.commit($NM.PHARMACY_ADD_PATIENT,
                     {
                         pharmacyIndex: pharmacyIndex,
                         patient: payloadPatient
@@ -66,7 +66,6 @@ export default {
             }
             sessionStorage.setItem('pharmacies', JSON.stringify(context.state.Pharmacies.pharmacies));
             sessionStorage.setItem('patients', JSON.stringify(context.state.Patients.patients));
-            console.log(JSON.parse(sessionStorage.getItem('pharmacies')))
         },
         [$A.INITIALIZATION]: async function (context) {
             await context.dispatch($NA.LOAD_PATIENTS_FROM_DB_TO_STORE);

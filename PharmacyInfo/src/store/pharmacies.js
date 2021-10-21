@@ -58,10 +58,10 @@ export const getters = {
 }
 
 export const mutations = {
-    [$M.ADD_PATIENT_TO_PHARMACY](state, payload) {
+    [$M.PHARMACY_ADD_PATIENT](state, payload) {
         state.pharmacies[payload.pharmacyIndex].Patients.push(payload.patient);
     },
-    [$M.REMOVE_PATIENT_FROM_PHARMACY](state, payload) {
+    [$M.PHARMACY_REMOVE_PATIENT](state, payload) {
         state.pharmacies[payload.pharmacyIndex].Patients.splice(payload.patientIndex, 1);
     },
     [$M.LOAD_PHARMACIES_TO_STORE](state, payload) {
@@ -78,7 +78,6 @@ export const actions = {
             });
 
             sessionStorage.setItem('pharmacies', JSON.stringify(data));
-            console.log(JSON.parse(sessionStorage.getItem('pharmacies')))
         }
         else {
             data = JSON.parse(data);

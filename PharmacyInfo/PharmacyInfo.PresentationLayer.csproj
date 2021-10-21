@@ -132,9 +132,6 @@
     <Content Include="src\store\namespacedTypes.js" />
     <Content Include="src\store\patients.js" />
     <Content Include="src\store\pharmacies.js" />
-    <Content Include="src\store\storeActions.js" />
-    <Content Include="src\store\storeGetters.js" />
-    <Content Include="src\store\storeMutations.js" />
     <Content Include="src\store\page.js" />
     <Content Include="src\PharmacyInfoPatientsPage.vue" />
     <None Include="src\PharmacyInfoPharmaciesList.vue" />

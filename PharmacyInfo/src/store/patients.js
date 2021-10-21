@@ -82,10 +82,10 @@ export const getters = {
 }
 
 export const mutations = {
-    [$M.ASSIGN_PHARMACY_TO_PATIENT](state, payload) {
+    [$M.PATIENT_ADD_PHARMACY](state, payload) {
         state.patients[payload.patientIndex].Pharmacies.push(payload.pharmacy);
     },
-    [$M.RELEASE_PHARMACY_FROM_PATIENT](state, payload) {
+    [$M.PATIENT_REMOVE_PHARMACY](state, payload) {
         state.patients[payload.patientIndex].Pharmacies.splice(payload.pharmacyIndex, 1);
     },
     [$M.LOAD_PATIENTS_TO_STORE](state, payload) {
