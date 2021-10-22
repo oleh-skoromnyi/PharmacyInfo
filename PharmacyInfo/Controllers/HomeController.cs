@@ -1,25 +1,22 @@
 ﻿using PharmasyInfo.Core.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using PharmacyInfo.DataAccessLayer;
 using PharmacyInfo.Core.Entities;
+using System.Configuration;
 
 namespace PharmacyInfo.Controllers
 {
     public class HomeController : Controller
     {
         private readonly string connectionString;
-
         IRepository<Patient> patientRepository;
         IRepository<Pharmacy> pharmacyRepository;
 
         public HomeController()
         {
-            connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
+            connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             patientRepository = new PatientRepository(connectionString);
             pharmacyRepository = new PharmacyRepository(connectionString);
         }
