@@ -1,6 +1,4 @@
-﻿/// <reference path="namespacedtypes.js" />
-/// <reference path="namespacedtypes.js" />
-import Patients from './patients.js';
+﻿import Patients from './patients.js';
 import Pharmacies from './pharmacies.js';
 import {
     actions as $A,

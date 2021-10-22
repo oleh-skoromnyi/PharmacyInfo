@@ -11,10 +11,18 @@ namespace PharmacyInfo.Controllers
 {
     public class HomeController : Controller
     {
-        private const string connectionString = "Server=SKOROMNYI;Database=PharmacyInfo;Trusted_Connection=True;";
+        private readonly string connectionString;
 
-        IRepository<Patient> patientRepository = new PatientRepository(connectionString);
-        IRepository<Pharmacy> pharmasyRepository = new PharmacyRepository(connectionString);
+        IRepository<Patient> patientRepository;
+        IRepository<Pharmacy> pharmacyRepository;
+
+        public HomeController()
+        {
+            connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+            patientRepository = new PatientRepository(connectionString);
+            pharmacyRepository = new PharmacyRepository(connectionString);
+        }
 
         [HttpGet]
         public JsonResult GetPatients()
@@ -26,7 +34,7 @@ namespace PharmacyInfo.Controllers
         [HttpGet]
         public JsonResult GetPharmacies()
         {
-            var pharmacies = pharmasyRepository.FindAll();
+            var pharmacies = pharmacyRepository.FindAll();
             return Json(pharmacies, JsonRequestBehavior.AllowGet);
         }
 
