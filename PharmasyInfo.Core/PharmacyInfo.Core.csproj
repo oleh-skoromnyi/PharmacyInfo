@@ -7,8 +7,8 @@
     <ProjectGuid>{04AD64E1-5E2E-4719-9A40-DD03D6A32803}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PharmasyInfo.Core</RootNamespace>
-    <AssemblyName>PharmasyInfo.Core</AssemblyName>
+    <RootNamespace>PharmacyInfo.Core</RootNamespace>
+    <AssemblyName>PharmacyInfo.Core</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Medication.cs" />
+    <Compile Include="Entities\MedicationRequestInfo.cs" />
     <Compile Include="Entities\Patient.cs" />
     <Compile Include="Entities\PatientInfo.cs" />
-    <Compile Include="Entities\PharmacyInfo.cs" />
+    <Compile Include="Entities\PharmacyItemInfo.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Entities\Pharmacy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

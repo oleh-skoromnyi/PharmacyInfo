@@ -1,5 +1,7 @@
-﻿import Patients from './patients.js';
-import Pharmacies from './pharmacies.js';
+﻿import { Medications } from './medications.js';
+import { Patients } from './patients.js';
+import { Pharmacies } from './pharmacies.js';
+import Auth from './auth.js';
 import {
     actions as $A,
     namespacedActions as $NA,
@@ -9,8 +11,10 @@ import {
 
 export default {
     modules: {
-        Patients: Patients,
-        Pharmacies: Pharmacies
+        Patients,
+        Pharmacies,
+        Medications,
+        Auth
     },
     actions: {
         [$A.ASSIGN_PATIENT_TO_PHARMACY]: async function (context, payload) {
@@ -65,6 +69,8 @@ export default {
         [$A.INITIALIZATION]: async function (context) {
             await context.dispatch($NA.LOAD_PATIENTS_FROM_DB_TO_STORE);
             await context.dispatch($NA.LOAD_PHARMACIES_FROM_DB_TO_STORE);
+            await context.dispatch($NA.LOAD_MEDICATIONS_FROM_DB_TO_STORE);
+            await context.commit($NM.AUTH_LOGIN, JSON.parse(sessionStorage.getItem('auth')));
         }
     }
 }

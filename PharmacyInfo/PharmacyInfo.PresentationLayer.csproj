@@ -123,17 +123,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Auth.html" />
     <Content Include="dist\bundle.js" />
     <Content Include="dist\bundle.js.LICENSE.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Medications.html" />
     <Content Include="Pharmacies.html" />
-    <None Include="src\PharmacyInfoPharmaciesPage.vue" />
+    <Content Include="src\AuthPage.vue" />
+    <None Include="src\PharmaciesPage.vue" />
+    <None Include="src\MedicationsList.vue" />
+    <None Include="src\MedicationsPage.vue" />
+    <Content Include="src\store\auth.js" />
+    <Content Include="src\store\medications.js" />
     <Content Include="src\store\patients.js" />
     <Content Include="src\store\pharmacies.js" />
     <Content Include="src\store\page.js" />
-    <Content Include="src\PharmacyInfoPatientsPage.vue" />
-    <None Include="src\PharmacyInfoPharmaciesList.vue" />
+    <Content Include="src\PatientsPage.vue" />
+    <None Include="src\PharmaciesList.vue" />
     <Content Include="src\index.css" />
     <Content Include="src\index.js" />
     <Content Include="Patients.html" />
@@ -141,15 +148,15 @@
     <Content Include="src\store\types.js" />
     <Content Include="webpack.config.js" />
     <Content Include="package.json" />
-    <Content Include="src\PharmacyInfoPageHeader.vue" />
-    <Content Include="src\PharmacyInfoPageFooter.vue" />
-    <Content Include="Web.config" />
-    <Content Include="src\PharmacyInfoPatientsList.vue" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <Content Include="src\PageHeader.vue" />
+    <Content Include="src\PageFooter.vue" />
+    <Content Include="web.config" />
+    <Content Include="src\PatientsList.vue" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
     </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -164,9 +171,9 @@
       <Project>{8942ab82-696d-46dd-8e61-8a4a20d18ac9}</Project>
       <Name>PharmacyInfo.DataAccessLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PharmasyInfo.Core\PharmasyInfo.Core.csproj">
+    <ProjectReference Include="..\PharmasyInfo.Core\PharmacyInfo.Core.csproj">
       <Project>{04ad64e1-5e2e-4719-9a40-dd03d6a32803}</Project>
-      <Name>PharmasyInfo.Core</Name>
+      <Name>PharmacyInfo.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

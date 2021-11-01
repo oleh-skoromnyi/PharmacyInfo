@@ -51,6 +51,18 @@
                             Pharmacies
                         </p>
                     </th>
+                    <th scope="col"
+                        class="table-header">
+                        <p class="table-item table-header">
+                            Refills Requested
+                        </p>
+                    </th>
+                    <th scope="col"
+                        class="table-header">
+                        <p class="table-item table-header">
+                            Refills Acсepted
+                        </p>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -88,6 +100,20 @@
                                 </div>
                             </div>
                         </div>
+                    </td>
+                    <td>
+                        <p class="table-item" v-for="requestedMedicine in item.MedicationsRequested">
+                            {{requestedMedicine.MedicationName + ' - '+ requestedMedicine.MedicationCount}}
+
+                            <button v-on:click="accept({patientId: requestedMedicine.PatientId, medicineId: requestedMedicine.MedicineId})">
+                                Accept
+                            </button>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="table-item" v-for="acceptedMedicine in item.MedicationsAccepted">
+                            {{acceptedMedicine.MedicationName + ' - '+ acceptedMedicine.MedicationCount}}
+                        </p>
                     </td>
                 </tr>
             </tbody>
@@ -137,7 +163,7 @@
                 resetPage: mutations.PATIENTS_RESET_PAGE
             }),
             ...mapActions({
-                assignPatientToPharmacy: actions.ASSIGN_PATIENT_TO_PHARMACY, 
+                assignPatientToPharmacy: actions.ASSIGN_PATIENT_TO_PHARMACY,
                 setNumberOfMonthToFilter: actions.CHANGE_NUMBER_OF_MONTH_TO_FILTER,
                 initialization: actions.INITIALIZATION
             }),

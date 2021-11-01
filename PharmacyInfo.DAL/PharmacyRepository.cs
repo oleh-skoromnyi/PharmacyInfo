@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using PharmacyInfo.Core.Entities;
-using PharmasyInfo.Core.Interfaces;
+using PharmacyInfo.Core.Interfaces;
 
 namespace PharmacyInfo.DataAccessLayer
 {

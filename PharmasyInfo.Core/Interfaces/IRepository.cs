@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PharmasyInfo.Core.Interfaces
+namespace PharmacyInfo.Core.Interfaces
 {
     public interface IRepository<T>
     {
