@@ -6,7 +6,14 @@ module.exports = {
     entry: './src/index.js',
     module: {
         rules: [
-            { test: /\.js$/, use: 'babel-loader' },
+            {
+                test: /\.js$/, use: {
+                    loader: 'babel-loader',
+                    options: {
+                        plugins: [require('babel-plugin-transform-object-rest-spread')]
+                    }
+                }
+            },
             { test: /\.vue$/, use: 'vue-loader' },
             { test: /\.css$/, use: ['vue-style-loader', 'css-loader'] },
         ]

@@ -1,12 +1,12 @@
 ﻿<template>
-    <header class="sticky-header">
+    <header>
         <nav class="navbar navbar-expand-lg scrolling-navbar">
-            <a class="navbar-brand" href="/Patients.html">Pharmacy Info</a>
+            <a class="navbar-brand" href="../Patients.html">Pharmacy Info</a>
             <div class="nav-item">
-                <a class="nav-link" href="/Patients.html">Patients</a>
+                <a class="nav-link" href="../Patients.html">Patients</a>
             </div>
             <div class="nav-item">
-                <a class="nav-link" href="/Pharmacies.html">Pharmacies</a>
+                <a class="nav-link" href="../Pharmacies.html">Pharmacies</a>
             </div>
         </nav>
     </header>
@@ -26,8 +26,9 @@
 
     .navbar {
         background-color: darkslategray;
-        justify-content:left;
+        justify-content: left;
     }
+
     .sticky-header {
         position: sticky;
         top: 0;

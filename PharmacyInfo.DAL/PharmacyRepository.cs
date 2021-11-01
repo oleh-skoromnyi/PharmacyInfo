@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using PharmacyInfo.Core.Entities;
 using PharmasyInfo.Core.Interfaces;
@@ -42,19 +43,48 @@ namespace PharmacyInfo.DataAccessLayer
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 connection.Open();
                 var reader = command.ExecuteReader();
+                var listItem = new Pharmacy();
 
                 foreach (var row in reader)
                 {
-                    var listItem = new Pharmacy();
+                    var info = new PatientInfo();
+                    var hasInfo = false;
                     for (int i = 0; i < reader.FieldCount; ++i)
                     {
-                        typeof(Pharmacy).GetProperty(reader.GetName(i))?.SetValue(listItem, reader.GetValue(i));
+                        if (reader.GetName(i) == "Id" && (int)reader.GetValue(i) != listItem.Id && listItem.Id != 0)
+                        {
+                            resultList.Add(listItem);
+                            listItem = new Pharmacy();
+                        }
+                        var property = typeof(Pharmacy).GetProperty(reader.GetName(i));
+                        if (!(property is null))
+                        {
+                            typeof(Pharmacy).GetProperty(reader.GetName(i))?.SetValue(listItem, reader.GetValue(i));
+                        }
+                        else
+                        {
+                            if (reader.GetName(i) == "PatientId" && !(reader.GetValue(i) is DBNull))
+                            {
+                                hasInfo = true;
+                            }
+                            if (hasInfo)
+                            {
+                                typeof(PatientInfo).GetProperty(reader.GetName(i))?.SetValue(info, reader.GetValue(i));
+                            }
+                        }
                     }
-                    resultList.Add((Pharmacy)listItem);
+                    if (listItem.Patients == null)
+                    {
+                        listItem.Patients = new List<PatientInfo>();
+                    }
+                    if (hasInfo)
+                    {
+                        listItem.Patients.Add(info); 
+                    }
                 }
+                resultList.Add(listItem);
             }
             return resultList;
         }
     }
 }
-

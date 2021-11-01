@@ -1,8 +1,7 @@
 CREATE PROCEDURE CreatePatient
 @FirstName nvarchar(100),
 @LastName nvarchar(100),
-@PharmacyAssignDate date,
-@PharmacyId int
+@PharmacyAssignDate date
 AS
-Insert Into Patients(FirstName,LastName,PharmacyAssignDate,PharmacyId)
-	Values (@FirstName,@LastName,@PharmacyAssignDate,@PharmacyId);
+Insert Into Patients(FirstName,LastName,PharmacyAssignDate)
+	Values (@FirstName,@LastName,@PharmacyAssignDate);

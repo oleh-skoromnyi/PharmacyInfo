@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace PharmacyInfo.Core.Entities
 {
-    public class Patient
+    public class PatientInfo
     {
-        public int Id { get; set; }
+        public int PatientId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime PharmacyAssignDate { get; set; }
-        public List<PharmacyItemInfo> Pharmacies { get; set; }
     }
 }

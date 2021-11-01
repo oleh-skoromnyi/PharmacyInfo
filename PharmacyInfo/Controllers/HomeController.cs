@@ -1,33 +1,50 @@
 ﻿using PharmasyInfo.Core.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using PharmacyInfo.DataAccessLayer;
 using PharmacyInfo.Core.Entities;
+using System.Configuration;
 
 namespace PharmacyInfo.Controllers
 {
     public class HomeController : Controller
     {
-        private const string connectionString = "Server=SKOROMNYI;Database=PharmacyInfo;Trusted_Connection=True;";
+        private readonly string connectionString;
+        IRepository<Patient> patientRepository;
+        IRepository<Pharmacy> pharmacyRepository;
 
-        IRepository<Patient> patientRepository = new PatientRepository(connectionString);
-        IRepository<Pharmacy> pharmasyRepository = new PharmacyRepository(connectionString);
-
-        [HttpGet]
-        public JsonResult Patients()
+        public HomeController()
         {
-            var patients = patientRepository.FindAll();
-            return Json(patients,JsonRequestBehavior.AllowGet);
+            connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            patientRepository = new PatientRepository(connectionString);
+            pharmacyRepository = new PharmacyRepository(connectionString);
         }
 
         [HttpGet]
-        public JsonResult Pharmacies()
+        public JsonResult GetPatients()
         {
-            var pharmacies = pharmasyRepository.FindAll();
+            var patients = patientRepository.FindAll();
+            return Json(patients, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetPharmacies()
+        {
+            var pharmacies = pharmacyRepository.FindAll();
             return Json(pharmacies, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult PutPatients(List<Patient> json)
+        {
+            Console.WriteLine(json);
+            return Json("Ok", JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult PutPharmacies(List<Pharmacy> json)
+        {
+            Console.WriteLine(json);
+            return Json("Ok", JsonRequestBehavior.AllowGet);
         }
     }
 }
