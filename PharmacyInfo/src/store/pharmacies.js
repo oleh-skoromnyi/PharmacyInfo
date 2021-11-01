@@ -23,10 +23,10 @@ const state = {
 
 const PHARMACY_ID_PROPERTY_NAME = 'Id';
 const RELATED_PATIENT_ID_PROPERTY_NAME = 'PatientId';
-const GET_PHARMACIES_ACTION_PATH = '/Home/GetPharmacies';
 
 export const getters = {
     [$G.PHARMACIES](state) {
+
         return state.pharmacies || [];
     },
     [$G.PHARMACIES_COUNT](state,getters) {
@@ -70,10 +70,7 @@ export const actions = {
     [$A.LOAD_PHARMACIES_FROM_DB_TO_STORE]: async function (context) {
         var data = sessionStorage.getItem('pharmacies');
         if (!data) {
-            await axios.get(GET_PHARMACIES_ACTION_PATH).then(function (response) {
-                data = response.data;
-            });
-
+            data = await (new PharmacyService()).getPharmacies();
             sessionStorage.setItem('pharmacies', JSON.stringify(data));
         }
         else {
@@ -83,7 +80,17 @@ export const actions = {
     }
 }
 
-export default {
+const GET_PHARMACIES_ACTION_PATH = '/Home/GetPharmacies';
+
+class PharmacyService{
+    async getPharmacies() {
+        return await axios.get(GET_PHARMACIES_ACTION_PATH).then((response) => response.data);
+    }
+}
+
+export default new PharmacyService();
+
+export const Pharmacies = {
     namespaced:true,
     state,
     getters,

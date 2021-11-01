@@ -1,6 +1,6 @@
-CREATE PROCEDURE GetPatients 
+CREATE PROCEDURE GetMedications
 AS
-Select Patients.Id, FirstName, LastName, PharmacyAssignDate, Pharmacies.Id as PharmacyId, PharmacyName from Patients 
-	left join AssignedPatients on Patients.Id = AssignedPatients.PatientId
-	left join Pharmacies on Pharmacies.Id = AssignedPatients.PharmacyId
-	order by Id
+Select Medications.Id, Name, Pharmacies.Id as PharmacyId, PharmacyName from MedicationsInPharmacies 
+	left join Medications on Medications.Id = MedicationsInPharmacies.MedicationId
+	left join Pharmacies on Pharmacies.Id = MedicationsInPharmacies.PharmacyId
+	order by Medications.Id

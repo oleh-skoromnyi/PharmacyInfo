@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MedicationService.cs" />
     <Compile Include="PatientService.cs" />
     <Compile Include="PharmacyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -50,9 +51,9 @@
       <Project>{8942ab82-696d-46dd-8e61-8a4a20d18ac9}</Project>
       <Name>PharmacyInfo.DataAccessLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PharmasyInfo.Core\PharmasyInfo.Core.csproj">
+    <ProjectReference Include="..\PharmasyInfo.Core\PharmacyInfo.Core.csproj">
       <Project>{04ad64e1-5e2e-4719-9a40-dd03d6a32803}</Project>
-      <Name>PharmasyInfo.Core</Name>
+      <Name>PharmacyInfo.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

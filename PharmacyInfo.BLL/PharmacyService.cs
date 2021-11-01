@@ -1,5 +1,5 @@
 ﻿using PharmacyInfo.Core.Entities;
-using PharmasyInfo.Core.Interfaces;
+using PharmacyInfo.Core.Interfaces;
 using System.Collections.Generic;
 
 namespace PharmacyInfo.BusinessLogicLayer

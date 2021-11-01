@@ -1,5 +1,7 @@
 ﻿const PharmaciesPath = 'Pharmacies/';
 const PatientsPath = 'Patients/';
+const MedicationsPath = 'Medications/';
+const AuthPath = 'Auth/';
 const PagePath = 'Page/';
 
 export const getters = {
@@ -22,6 +24,13 @@ export const getters = {
     PHARMACY_RELATED_PATIENT_INDEX: 'PHARMACY_RELATED_PATIENT_INDEX',
     GET_PHARMACY_BY_ID: 'GET_PHARMACY_BY_ID',
 
+    //MEDICATIONS
+    MEDICATIONS: 'MEDICATIONS',
+
+    //AUTH
+    AUTH_ROLE: 'AUTH_ROLE',
+    AUTH_ID: 'AUTH_ID',
+
     //PAGE
     ITEMS_FROM: 'ITEMS_FROM',
     ITEMS_TO: 'ITEMS_TO',
@@ -41,6 +50,13 @@ export const mutations = {
     PHARMACY_ADD_PATIENT: 'PHARMACY_ADD_PATIENT',
     PHARMACY_REMOVE_PATIENT: 'PHARMACY_REMOVE_PATIENT',
 
+    //MEDICATIONS
+    LOAD_MEDICATIONS_TO_STORE: 'LOAD_MEDICATIONS_TO_STORE',
+
+    //AUTH
+    AUTH_LOGIN: 'AUTH_LOGIN',
+    AUTH_LOGOUT:'AUTH_LOGOUT',
+
     //PAGE
     NEXT_PAGE: 'NEXT_PAGE',
     PREVIOUS_PAGE: 'PREVIOUS_PAGE',
@@ -55,6 +71,9 @@ export const actions = {
 
     //PHARMACIES
     LOAD_PHARMACIES_FROM_DB_TO_STORE: 'LOAD_PHARMACIES_FROM_DB_TO_STORE',
+
+    //MEDICATIONS
+    LOAD_MEDICATIONS_FROM_DB_TO_STORE: 'LOAD_MEDICATIONS_FROM_DB_TO_STORE',
 
     //STORE
     ASSIGN_PATIENT_TO_PHARMACY: 'ASSIGN_PATIENT_TO_PHARMACY',
@@ -80,6 +99,13 @@ export const namespacedGetters = {
     PHARMACY_INDEX: PharmaciesPath + getters.PHARMACY_INDEX,
     PHARMACY_RELATED_PATIENT_INDEX: PharmaciesPath + getters.PHARMACY_RELATED_PATIENT_INDEX,
     GET_PHARMACY_BY_ID: PharmaciesPath + getters.GET_PHARMACY_BY_ID,
+
+    //MEDICATIONS
+    MEDICATIONS: MedicationsPath + getters.MEDICATIONS,
+
+    //AUTH
+    AUTH_ROLE: AuthPath + getters.AUTH_ROLE,
+    AUTH_ID: AuthPath + getters.AUTH_ID,
 
     //PATIENTS PAGE
     PATIENTS_ITEMS_FROM: PatientsPath + PagePath + getters.ITEMS_FROM,
@@ -110,6 +136,13 @@ export const namespacedMutations = {
     PHARMACY_ADD_PATIENT: PharmaciesPath + mutations.PHARMACY_ADD_PATIENT,
     PHARMACY_REMOVE_PATIENT: PharmaciesPath + mutations.PHARMACY_REMOVE_PATIENT,
 
+    //MEDICATIONS
+    LOAD_MEDICATIONS_TO_STORE: MedicationsPath + mutations.LOAD_MEDICATIONS_TO_STORE,
+
+    //AUTH
+    AUTH_LOGIN: AuthPath + mutations.AUTH_LOGIN,
+    AUTH_LOGOUT: AuthPath + mutations.AUTH_LOGOUT,
+
     //PATIENTS PAGE
     PATIENTS_NEXT_PAGE: PatientsPath + PagePath + mutations.NEXT_PAGE,
     PATIENTS_PREVIOUS_PAGE: PatientsPath + PagePath + mutations.PREVIOUS_PAGE,
@@ -133,6 +166,9 @@ export const namespacedActions = {
 
     //PHARMACIES
     LOAD_PHARMACIES_FROM_DB_TO_STORE: PharmaciesPath + actions.LOAD_PHARMACIES_FROM_DB_TO_STORE,
+
+    //MEDICATIONS
+    LOAD_MEDICATIONS_FROM_DB_TO_STORE: MedicationsPath + actions.LOAD_MEDICATIONS_FROM_DB_TO_STORE,
 
     //STORE
     ASSIGN_PATIENT_TO_PHARMACY: actions.ASSIGN_PATIENT_TO_PHARMACY,

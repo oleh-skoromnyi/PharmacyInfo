@@ -121,7 +121,7 @@ export const actions = {
     }
 }
 
-export default {
+export const Patients = {
     namespaced:true,
     state,
     getters,

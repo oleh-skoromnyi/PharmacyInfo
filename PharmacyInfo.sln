@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyInfo.BusinessLogicL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyInfo.DataAccessLayer", "PharmacyInfo.DAL\PharmacyInfo.DataAccessLayer.csproj", "{8942AB82-696D-46DD-8E61-8A4A20D18AC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmasyInfo.Core", "PharmasyInfo.Core\PharmasyInfo.Core.csproj", "{04AD64E1-5E2E-4719-9A40-DD03D6A32803}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyInfo.Core", "PharmasyInfo.Core\PharmacyInfo.Core.csproj", "{04AD64E1-5E2E-4719-9A40-DD03D6A32803}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PharmacySql", "PharmacySql", "{62FA70AE-1FCE-4904-ACA5-72486C325056}"
 	ProjectSection(SolutionItems) = preProject

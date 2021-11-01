@@ -34,14 +34,14 @@
                         </p>
                     </th>
                     <th scope="col"
-                        class="table-header">
+                        class="table-header" v-if="authRole === 'Pharmacy'">
                         <p class="table-item table-header">
                             Patients
                         </p>
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody v-if="authRole === 'Pharmacy'">
                 <tr v-for="pharmacy in getPharmacies">
                     <td>
                         <p class="table-item">
@@ -71,6 +71,35 @@
                     <td>
                         <p class="table-item" v-for="patient in pharmacy.Patients">
                             {{patient.FirstName+' '+patient.LastName+';'}}
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody v-else-if="authRole === 'Patient'">
+                <tr v-for="pharmacy in getPharmacies.filter(pharmacy=>pharmacy.Patients.filter(patient=>patient.PatientId === authId).length > 0)">
+                    <td>
+                        <p class="table-item">
+                            {{pharmacy.PharmacyName}}
+                        </p>
+                    </td>
+                    <td>
+                        <p class="table-item">
+                            {{pharmacy.PhoneNumber}}
+                        </p>
+                    </td>
+                    <td>
+                        <p class="table-item">
+                            {{pharmacy.StateCode}}
+                        </p>
+                    </td>
+                    <td>
+                        <p class="table-item">
+                            {{pharmacy.ZipCode}}
+                        </p>
+                    </td>
+                    <td>
+                        <p class="table-item">
+                            {{pharmacy.StreetAddress}}
                         </p>
                     </td>
                 </tr>
@@ -125,6 +154,8 @@
                 page: state => state.Pharmacies.Page.page
             }),
             ...mapGetters({
+                authRole: getters.AUTH_ROLE,
+                authId: getters.AUTH_ID,
                 getPageCount: getters.PHARMACIES_PAGE_COUNT,
                 getPharmacies: getters.PHARMACIES_AT_CURRENT_PAGE,
             })

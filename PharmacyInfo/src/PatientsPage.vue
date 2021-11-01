@@ -7,9 +7,9 @@
 </template>
 
 <script>
-    import PharmacyInfoPageFooter from './PharmacyInfoPageFooter.vue';
-    import PharmacyInfoPageHeader from './PharmacyInfoPageHeader.vue';
-    import PharmacyInfoPatientsList from './PharmacyInfoPatientsList.vue';
+    import PharmacyInfoPageFooter from './PageFooter.vue';
+    import PharmacyInfoPageHeader from './PageHeader.vue';
+    import PharmacyInfoPatientsList from './PatientsList.vue';
 
     export default {
         components: {

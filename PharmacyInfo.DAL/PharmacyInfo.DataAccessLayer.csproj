@@ -41,14 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MedicationRepository.cs" />
     <Compile Include="PatientRepository.cs" />
     <Compile Include="PharmacyRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PharmasyInfo.Core\PharmasyInfo.Core.csproj">
+    <ProjectReference Include="..\PharmasyInfo.Core\PharmacyInfo.Core.csproj">
       <Project>{04ad64e1-5e2e-4719-9a40-dd03d6a32803}</Project>
-      <Name>PharmasyInfo.Core</Name>
+      <Name>PharmacyInfo.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
